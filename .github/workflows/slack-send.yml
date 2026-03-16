@@ -1,0 +1,33 @@
+name: Slack Send
+
+on:
+  push:
+    paths:
+      - 'slack-request.txt'
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install slack-sdk
+
+      - name: Send message
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: python scripts/slack_send.py
+
+      - name: Commit response
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add slack-response.txt
+          git commit -m "slack response" || echo "nothing to commit"
+          git push
