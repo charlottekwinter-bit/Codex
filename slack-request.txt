@@ -1,2 +1,2 @@
-channel: @U0A7N6K5Y6P
+channel: @U0A7D8B325V
 message: Test test1
