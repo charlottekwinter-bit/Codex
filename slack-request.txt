@@ -1,2 +1,2 @@
 channel: @U0A7D8B325V
-message: Test test1
+message: Message Charlotte here, Codex
